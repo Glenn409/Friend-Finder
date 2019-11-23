@@ -1,15 +1,9 @@
 const express = require('express')
 const router = express.Router()
-
-let friends = [
-    {test:'test'}
-    ,{af:'eat'}
-]
+const friendsArray = require('../data/friends.js')
 
 router.get('/friends',function(req,res){
-    console.log('getting api data')
-    console.log(friends)
-    return res.json(friends)
+    return res.json(friendsArray)
 })
 
 module.exports = router

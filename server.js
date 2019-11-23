@@ -8,8 +8,10 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
 app.use(express.static('css'))
+
 app.use('/api',apiRoutes)
 app.use('/',htmlRoutes)
+
 
 app.listen(PORT,function(){
     console.log('App listening localhost:'+ PORT)
