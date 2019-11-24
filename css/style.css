@@ -49,16 +49,21 @@ label{
 .submit-div{
     display:flex;
     justify-content: center;
-    
+    flex-direction: column;
+    margin-top:50px;
+    margin-bottom:150px;
+}
+.submit-div p{
+    margin:auto;
 }
 .submit-div button{
+    margin:auto;
+    margin-bottom:50px;
     font-size:25px;
     background-color:#337ab7;
     color:white;
     border:none;
     border-radius: 25px;
-    margin-top:50px;
-    margin-bottom:150px;
     width:500px;
     padding-top:10px;
     padding-bottom:10px;
@@ -67,4 +72,8 @@ label{
     background-color:#286090;
     cursor: pointer;
 
+}
+#imageError, #nameError,#error{
+    font-size:25px;
+    color:red;
 }

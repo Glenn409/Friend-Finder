@@ -16,8 +16,10 @@
             <form>
                 <p>Name: (required)</p>
                 <input type="text" id='name'><br>
+                <p id='nameError'></p>
                 <p>Link to Photo Image (required)</p>
                 <input type="text" id='image'><br>
+                <p id='imageError'></p>
             </form>
 
             <div class ='question-container'>
@@ -153,24 +155,50 @@
             </div>
             <div class='submit-div'>
                 <button class = 'submit-but'>Submit</button>
+                <p id='error'></p>
             </div>
     </div>
 
 </body>
-<script >
+<script type='text/javascript'>
     
     $('.submit-but').click(function(){
+        $("#imageError").text("")
+        $('#nameError').text('')
+        $('#error').text('')
+        
         let array = []
-        $('.myList').each(function(){
+        let userName = $('#name').val()
+        let userImage = $('#image').val()
+        
+
+        if(userImage === '' && userName === ''){
+            $('#imageError').text('- Please fill out this field.')
+            $('#nameError').text('- Please fill out this field.')
+            $('#error').text('- Please fill out all fields.')
+        } else if(userImage === ''){
+            $('#imageError').text('- Please fill out this field.')
+            $('#error').text('- Please fill out all fields.')
+        } else if(userName === ''){
+            $('#nameError').text('- Please fill out this field.')
+            $('#error').text('- Please fill out all fields.')
+        } else {
+            $('.myList').each(function(){
             array.push($(this).val())
         })
 
         let obj = {
-            name: $('#name').val(),
-            image: $('#image').val(),
+            name: userName,
+            image: userImage,
             survey: array
         }
-        addUser(array)
+        console.log(obj)
+        $.post('/api/friends',obj,function(data){
+            if(data){
+                console.log('Posting')
+            }
+        })
+        }
     })
 </script>
 </html> 
