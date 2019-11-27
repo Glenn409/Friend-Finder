@@ -22,6 +22,18 @@
                 <p id='imageError'></p>
             </form>
 
+            <div class='modal'>
+                <div class='modal-content'>
+                    <span class="close">&times;</span>
+                    <h1 id='matchHeader'>Your Match!</h1>
+                    <div class='matchBox'>
+                        <h2 id='matchName'></h2>
+                        <img src='' id='matchImage'> 
+                    </div>
+                </div>
+            </div>
+
+            
             <div class ='question-container'>
                 <div class='question-box'>
                     <h1>Question 1</h1>
@@ -157,11 +169,16 @@
                 <button class = 'submit-but'>Submit</button>
                 <p id='error'></p>
             </div>
+
+            <div class="container-footer">
+                <a href='/api/friends' target='_blank'>API List</a>
+                <a target = '_blank' href='https://github.com/Glenn409/Friend-Finder'>Github Repo</a>
+            </div>
     </div>
 
 </body>
 <script type='text/javascript'>
-    
+
     $('.submit-but').click(function(){
         $("#imageError").text("")
         $('#nameError').text('')
@@ -192,7 +209,9 @@
             image: userImage,
             survey: array
         }
-        console.log(obj)
+
+        findSimilarMatch(obj)
+        $('.modal').css('display','block')
         $.post('/api/friends',obj,function(data){
             if(data){
                 console.log('Posting')
@@ -200,5 +219,58 @@
         })
         }
     })
+
+    $('span').click(function(){
+        $('.modal').css('display','none')
+    })
+
+
+    function findSimilarMatch(userObj){
+        console.log(userObj)
+        let bestCurrentMatch = false; 
+        
+        $.ajax({
+            url: '/api/friends',
+            method: 'GET'
+        }).then(function(data){
+            for (let i = 0; i < data.length; i++){
+
+                let arrayOfDifferences = []
+                let matchNumber = 0
+
+                for (let x = 0; x < data[i].survey.length; x++){
+                    let difference = data[i].survey[x] - userObj.survey[x]
+                    
+                    if(difference < 0){
+                        difference = difference * -1
+                    }
+                    arrayOfDifferences.push(difference)
+                }
+
+                for(let i = 0; i < arrayOfDifferences.length;i++){
+                    matchNumber = matchNumber + arrayOfDifferences[i]
+                }
+
+                if(bestCurrentMatch === false){
+                    bestCurrentMatch = {
+                        info: data[i],
+                        simularityNumber: matchNumber
+                    }
+                } else if (bestCurrentMatch.simularityNumber > matchNumber){
+                    bestCurrentMatch = {
+                        info: data[i],
+                        simularityNumber: matchNumber
+                    }
+                }
+            }
+            updateMatchHtml(bestCurrentMatch)
+        })
+    }
+
+    function updateMatchHtml(match){
+        console.log('updating html')
+        $('#matchName').text(match.info.name)
+        $('#matchImage').attr('src',match.info.image)
+    }    
 </script>
 </html> 
