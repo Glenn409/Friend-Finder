@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT
 const htmlRoutes = require('./app/routing/htmlRoutes.js')
 const apiRoutes = require('./app/routing/apiRoutes.js')
 
