@@ -1,4 +1,7 @@
 
+a{
+    font-size:20px;
+}
 .container{
     width: 960px;
     margin-left:auto;
@@ -47,7 +50,13 @@ label{
     margin-bottom:5px;
 }
 .container-footer{
+    border-radius:5px;
+    padding: 0px 15px 15px 15px;
+    background-color:lightgrey;
     margin-bottom: 100px;    
+}
+.container-footer p, .container-footer a {
+    font-size:20px;
 }
 .submit-div{
     display:flex;
@@ -130,4 +139,22 @@ label{
 }
 #matchHeader{
     margin-top:0;
+}
+#startbutton{
+    font-size:18px;
+    color:white;
+    background-color:#337ab7;
+    border-radius: 5px;
+    width:100px;
+    height:40px;
+}
+#startbutton:hover{
+    text-decoration: none;
+    cursor:pointer;
+    background-color:#286090;
+    color:white;
+    transition: all ease-in-out;
+}
+.survey-footer {
+    margin-bottom:150px;
 }

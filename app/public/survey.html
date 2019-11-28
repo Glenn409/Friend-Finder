@@ -170,9 +170,9 @@
                 <p id='error'></p>
             </div>
 
-            <div class="container-footer">
+            <div class="survey-footer">
                 <a href='/api/friends' target='_blank'>API List</a>
-                <a target = '_blank' href='https://github.com/Glenn409/Friend-Finder'>Github Repo</a>
+                <a id='github' target = '_blank' href='https://github.com/Glenn409/Friend-Finder'>Github Repo</a>
             </div>
     </div>
 
@@ -269,6 +269,7 @@
 
     function updateMatchHtml(match){
         console.log('updating html')
+        console.log('Your Match\n' + JSON.stringify(match))
         $('#matchName').text(match.info.name)
         $('#matchImage').attr('src',match.info.image)
     }    
