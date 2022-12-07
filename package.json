@@ -4,7 +4,7 @@
   "description": "A express program to allow a user to create a survey and returns a match with similar answers.",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.18.2"
   },
   "devDependencies": {},
   "scripts": {
